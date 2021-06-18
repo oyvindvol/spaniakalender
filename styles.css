@@ -1,0 +1,22 @@
+html, body {
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+#calendar {
+  margin: 40px auto;
+}
+
+.skal {
+	background-color: #28a745;
+	border-color: #28a745;
+}
+
+.kanskje {
+	background-color: #ffc107;
+	border-color: #ffc107;
+}
+
+.m-t-20 {
+	margin-top: 20px;
+}

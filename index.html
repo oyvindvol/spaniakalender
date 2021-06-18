@@ -1,7 +1,53 @@
-<html>
+<!DOCTYPE html>
+<html lang='en'>
 	<head>
+		<meta charset='utf-8' />
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.css" integrity="sha256-RCJT6YvohmGy+rWQe3hpPZez8iaPnirFVfiwaBVCk1k=" crossorigin="anonymous">
+	    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.js" integrity="sha256-6l5QOXZ6Mkg+2tOaJgs8yT7xx2WapaIPQl7qpB55/V0=" crossorigin="anonymous"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales/nb.js" integrity="sha256-OGdMV0SqReU7/3y99XmMzlDYjldeGMjy4dyu89hAGl4=" crossorigin="anonymous"></script>
+	    <link href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.css' rel='stylesheet' />
+		<link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
+		<link rel="stylesheet" href="styles.css">
 	</head>
 	<body>
-		<h1>Spaniakalender</h1>
+		<nav class="navbar navbar-light bg-light">
+		  <div class="container-fluid">
+		    <a class="navbar-brand" href="#">
+		      <img src="img/flag.png" width="30" height="30" class="align-text-center">
+		      &nbsp; Spaniakalender
+		    </a>
+		  </div>
+		</nav>
+
+		<div class="container">
+			<div class="row m-t-20">
+				<div class="col-md-12">
+					<b>Fargekoder</b>
+					<h4>
+						<span class="badge bg-warning">Kanskje</span>
+						<span class="badge bg-success">Skal/Bestilt</span>
+					</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div id="calendar"></div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var calendarEl = document.getElementById('calendar');
+		        var calendar = new FullCalendar.Calendar(calendarEl, {
+		        	locale: 'nb',
+	          		initialView: 'dayGridMonth',
+	          		weekNumbers: true,
+          		 	events: 'https://api.npoint.io/279b3bd125075917be34'
+		        });
+		        calendar.render();
+			});	
+		</script>
 	</body>
 </html>
