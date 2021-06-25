@@ -93,9 +93,11 @@
 
 					if (fromName === '') {
 						alert('Du må skrive inn hvem meldingen er fra.');
+						return;
 					}
 					if (message === '') {
 						alert('Du må skrive inn en melding.');
+						return;
 					}
 
 					var un = 'api';
