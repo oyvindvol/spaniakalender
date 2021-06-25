@@ -20,19 +20,54 @@
 		  </div>
 		</nav>
 
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row m-t-20">
-				<div class="col-md-12">
-					<b>Fargekoder</b>
-					<h4>
-						<span class="badge bg-warning">Kanskje</span>
-						<span class="badge bg-success">Skal/Bestilt</span>
-					</h4>
+				<div class="col-md-2">
+					<div class="row">
+						<div class="col-md-12">
+							<h3>Send melding</h2>
+
+							<div class="alert alert-success fade show" style="display:none;" role="alert">
+						  		<strong>Melding sendt!</strong> Din melding har blitt sendt på epost til alle meldingsmottakere.
+							</div>
+						
+							<div class="mb-3">
+						  		<label for="fromName" class="form-label">Fra</label>
+						  		<input type="text" class="form-control" id="fromName" placeholder="Ditt navn">
+							</div>
+							<div class="mb-3">
+							  <label for="message" class="form-label">Melding</label>
+							  <textarea class="form-control" id="message" rows="3" placeholder="Din melding..."></textarea>
+							</div>
+							<div>
+							    <button type="submit" class="btn btn-primary mb-3 btn-send">Send</button>
+						  	</div>
+						  	<div>
+						  		<b>Sendes til:</b>
+						  		<ul>
+						  			<li>oyvindvol@gmail.com</li>
+						  			<li>haavard.voldsund@gmail.com</li>
+						  		</ul>
+						  	</div>
+					  	</div>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div id="calendar"></div>
+				<div class="col-md-10">
+					<div class="row">
+						<div class="col-md-12">
+							<b>Fargekoder</b>
+							<h4>
+								<span class="badge bg-warning">Kanskje</span>
+								<span class="badge bg-success">Skal/Bestilt</span>
+							</h4>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div id="calendar"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -47,7 +82,50 @@
           		 	events: 'https://api.npoint.io/279b3bd125075917be34'
 		        });
 		        calendar.render();
+
+		        registerBtnSend();
 			});	
+
+			function registerBtnSend() {
+				$('.btn-send').on('click', function() {
+					var fromName = $('#fromName').val();
+					var message = $('#message').val();
+
+					if (fromName === '') {
+						alert('Du må skrive inn hvem meldingen er fra.');
+					}
+					if (message === '') {
+						alert('Du må skrive inn en melding.');
+					}
+
+					var un = 'api';
+					var pw = 'key-f7d813b7f8d68958e3d72a0f47452e48';
+					var appUsers = ['oyvindvol@gmail.com', 'haavard.voldsund@gmail.com'];
+					$.ajax({
+					    url: "https://api.mailgun.net/v3/sandbox4d053121935e4c0ea92f161f93561718.mailgun.org/messages",
+					    type: "POST",
+					    username: un,
+					    password: pw,
+					    data: {
+					        from: 'Spaniakalender <spaniakalender@spaniakalender.no>',
+					        to: 'oyvindvol@gmail.com,oyvind@compilo.no',
+					        subject: "Spaniakalender - ny melding",
+					        html: "<h4>Ny melding fra: " + fromName + "</h4><br /><h4>Melding: "+message+"</h4><br /><h4>Gå til Spaniakalender: </h4><a href='https://oyvindvol.github.io/spaniakalender'>https://oyvindvol.github.io/spaniakalender</a>"
+					    },
+					    beforeSend: function (xhr) {
+						    xhr.setRequestHeader("Authorization", "Basic " + btoa(un + ":" + pw));
+						},
+					    success: function(data) {
+					    	$('#fromName').val('');
+					    	$('#message').val('');
+					        $('.alert-success').show();
+					    },
+					    error: function(e) {
+					        console.log(e);
+					    }
+					});
+				});
+			}
 		</script>
 	</body>
 </html>
