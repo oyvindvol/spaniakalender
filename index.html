@@ -47,6 +47,7 @@
 						  		<ul>
 						  			<li>oyvindvol@gmail.com</li>
 						  			<li>haavard.voldsund@gmail.com</li>
+						  			<li>tvolds@gmail.com</li>
 						  		</ul>
 						  	</div>
 					  	</div>
@@ -102,7 +103,6 @@
 
 					var un = 'api';
 					var pw = 'key-f7d813b7f8d68958e3d72a0f47452e48';
-					var appUsers = ['oyvindvol@gmail.com', 'haavard.voldsund@gmail.com'];
 					$.ajax({
 					    url: "https://api.mailgun.net/v3/sandbox4d053121935e4c0ea92f161f93561718.mailgun.org/messages",
 					    type: "POST",
@@ -110,7 +110,7 @@
 					    password: pw,
 					    data: {
 					        from: 'Spaniakalender <spaniakalender@spaniakalender.no>',
-					        to: 'oyvindvol@gmail.com,oyvind@compilo.no',
+					        to: 'oyvindvol@gmail.com,haavard.voldsund@gmail.com,tvolds@gmail.com',
 					        subject: "Spaniakalender - ny melding",
 					        html: "<h4>Ny melding fra: " + fromName + "</h4><br /><h4>Melding: "+message+"</h4><br /><h4>Gå til Spaniakalender: </h4><a href='https://oyvindvol.github.io/spaniakalender'>https://oyvindvol.github.io/spaniakalender</a>"
 					    },
